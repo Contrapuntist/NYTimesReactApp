@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Main from './components/Main.jsx';
 import Search from './components/Search.jsx';
+import Jumbotron from './components/Jumbotron.jsx';
 
 export default class App extends Component {
   render() {
@@ -10,8 +11,9 @@ export default class App extends Component {
 
       // </div>
       <div>
-       <Main> 
-         <Search />
+       <Main>
+        <Jumbotron />
+        <Search />
        </Main>
       </div>  
     );
