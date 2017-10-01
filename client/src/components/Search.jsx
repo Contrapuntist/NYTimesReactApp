@@ -1,5 +1,7 @@
 import React from "react";
 import API from '../Utils/API.js';
+import Results from './Results.jsx';
+
 
 class Search extends React.Component {
 
@@ -9,19 +11,21 @@ class Search extends React.Component {
             enddate: "", 
             results: []
         };
-    
-    componentDidMount() { 
+
+
+    componentWillMount() {
         this.searchNYTimes(this.state.topic, this.state.startdate, this.state.enddate);
     }
 
-    searchNYTimes = (query, startdate, enddate) => { 
-        API.search(query, startdate, enddate)
-            .then(res => this.setState({results: `results`}))
-            catch(err => console.log(err));
+    searchNYTimes = () => { 
+        API.search(this.state.topic, this.state.startdate, this.state.enddate)
+            .then(res => this.setState({res: this.state.results}))
+            .catch(err => console.log(err));
     };
 
     formSubmit = event => { 
         event.preventDefault();
+        console.log(this.state.topic);
         if (!this.state.topic) { 
             alert("Please enter a topic to search for articles");
         }
@@ -29,16 +33,31 @@ class Search extends React.Component {
     }
 
     topicSearchHandler = event => { 
-        const topicvalue = event.target.topic;
-        const topicname = event.target.name
+        const value = event.target.value;
+        const name = event.target.name
+        console.log(value);
+        this.setState({
+            [name]: value
+        });
     } 
 
-    startdateSeachHandeler = event => { 
-        const
+    startdateSearchHandler = event => { 
+        const value = event.target.value; 
+        const name = event.target.name; 
+        this.setState({
+            [name]: value
+          });
+    }
+
+    enddateSearchHandler = event => { 
+        const value = event.target.value; 
+        const name = event.target.name; 
+        this.setState({ [name] : value });
     }
 
     render() { 
         return(
+            <div>
             <div className="row">
                 <div className="col">
                     <form>
@@ -48,32 +67,36 @@ class Search extends React.Component {
                                 value={this.state.topic}
                                 type="text" 
                                 className="form-control"
-                                name="Topic" 
-                                onChange={this.inputHandler}
+                                name="topic" 
+                                onChange={this.topicSearchHandler}
                                 aria-describedby="emailHelp" 
                                 placeholder="Search for topic"/> 
                         </div>
                         <div className="form-group">
                             <label for="startdate">Start Date</label>
                             <input
-                                value={this.state.startdate} 
+                                name="startdate"
+                                value={this.state.startdate}
                                 type="text" 
                                 className="form-control" 
-                                onChange={this.inputHandler} 
+                                onChange={this.startdateSearchHandler} 
                                 placeholder="Start Date"/>
                         </div>
                         <div className="form-group">
-                            <label for="startdate">End  Date</label>
+                            <label for="enddate">End  Date</label>
                             <input
+                                name="enddate"
                                 value={this.state.enddate} 
                                 type="text" 
                                 className="form-control" 
-                                onChange={this.inputHandler} 
+                                onChange={this.enddateSearchHandler} 
                                 placeholder="End Date"/>
                         </div>
                         <button className="btn btn-primary" onClick={this.formSubmit}>Find Articles</button>
                     </form>
                 </div>
+            </div>
+            <Results searchresults={this.state.results}/> 
             </div>
         );  
     }

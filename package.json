@@ -1,35 +1,22 @@
 {
-  "name": "nytimesreactapp",
+  "name": "mern",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/Contrapuntist/NYTimesReactApp.git",
-  "author": "Contrapuntist <contrapuntist@gmail.com>",
-  "license": "MIT",
+  "description": "Mern Demo",
+  "main": "server.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "node scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "axios": "^0.16.2",
-    "express": "^4.15.4",
-    "html-webpack-plugin": "^2.30.1",
-    "mongoose": "^4.11.12",
-    "path": "^0.12.7",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-router": "^4.2.0",
-    "request": "^2.82.0",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^4.7.2",
-    "eslint-plugin-react": "^7.4.0"
+    "express": "^4.15.4"
   }
 }
