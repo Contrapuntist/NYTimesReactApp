@@ -3,6 +3,21 @@ import API from '../Utils/API.js';
 import Results from './Results.jsx';
 
 
+// const stubdata = {
+//     topic: "tacos",
+//     start: "20000101",
+//     end: "20101231"
+// } 
+
+// function axiosTest() {API.search(stubdata.topic, stubdata.start, stubdata. end)
+//     .then(res => { 
+//         console.log("AXIOS TESTING RESULTS BELOW");
+//         console.log(res); 
+//     }).catch(err => console.log(err)); 
+// }
+
+// axiosTest();
+
 class Search extends React.Component {
 
     state = {
@@ -13,23 +28,28 @@ class Search extends React.Component {
         };
 
 
-    componentWillMount() {
-        this.searchNYTimes(this.state.topic, this.state.startdate, this.state.enddate);
-    }
+    // componentDidMount() {
+    //     this.searchNYTimes();
+    // }
 
-    searchNYTimes = () => { 
-        API.search(this.state.topic, this.state.startdate, this.state.enddate)
-            .then(res => this.setState({res: this.state.results}))
-            .catch(err => console.log(err));
+    searchNYTimes = (topic, startdate, enddate) => { 
+        API.search(topic, startdate, enddate)
+            .then(res => { 
+                console.log(res.data.response.docs);
+                this.setState({ results: res.data.response.docs}) 
+            }).catch(err => console.log(err));
     };
 
     formSubmit = event => { 
         event.preventDefault();
+        console.log('in formSubmit');
         console.log(this.state.topic);
         if (!this.state.topic) { 
             alert("Please enter a topic to search for articles");
+        } else {
+            this.searchNYTimes(this.state.topic, this.state.startdate, this.state.enddate);
+            console.log('form submit triggered');
         }
-        console.log('form submit triggered');
     }
 
     topicSearchHandler = event => { 
@@ -44,9 +64,10 @@ class Search extends React.Component {
     startdateSearchHandler = event => { 
         const value = event.target.value; 
         const name = event.target.name; 
+        console.log(value);
         this.setState({
             [name]: value
-          });
+        });
     }
 
     enddateSearchHandler = event => { 
