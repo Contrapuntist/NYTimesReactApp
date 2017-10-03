@@ -6,15 +6,17 @@ const results = props => {
     console.log(props);
     const searchresults = props.searchresults.map((searchresult) => {
         return(
-        <div>
-            <h2>{searchresult.headline.main}</h2>
-            {searchresult.snippet}
-            <p>{searchresult.web_url}</p>
+        <div className='card my-2' key='{searchresult._id}'>
+            <div className='card-body' >
+                <h2>{searchresult.headline.main}</h2>
+                <p>{searchresult.snippet}</p>
+                <p>{searchresult.web_url}</p>
+                <button className='btn btn-primary'>Save Article</button>
+            </div>
         </div>
         );
     });
-    // const Headlines= map
-    // // const listResults =  
+
     return (
     <div className="row mt-4">
         <div className="col">
@@ -23,14 +25,7 @@ const results = props => {
                     <h3 >Search results</h3>
                 </div>
                 <div className='p-3'>
-                    <div className='card'>
-                        {searchresults}
-                        {/* <h3>{props.searchresults}</h3>
-                        {/* <p>Score: {props.searchresults[0].score} </p>
-                        <div>{props.searchresults[0].snippet} </div>
-                        <p>Link: {props.searchresults[0].web_url} </p>
-                        <p>Word count: {props.searchresults[0].word_count}</p> */} */}
-                    </div>
+                    {searchresults}
                 </div>
             </div>
             
