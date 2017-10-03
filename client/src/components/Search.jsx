@@ -79,47 +79,51 @@ class Search extends React.Component {
     render() { 
         return(
             <div>
-            <div className="row">
-                <div className="col">
-                    <form>
-                        <div className="form-group">
-                            <label for="Topic">Topic</label>
-                            <input 
-                                value={this.state.topic}
-                                type="text" 
-                                className="form-control"
-                                name="topic" 
-                                onChange={this.topicSearchHandler}
-                                aria-describedby="emailHelp" 
-                                placeholder="Search for topic"/> 
+                <div className="row">
+                    <div className="col">
+                        <div className='card'>
+                            <div className="card-body">
+                                <form>
+                                <div className="form-group">
+                                    <label htmlFor="Topic">Topic</label>
+                                    <input 
+                                        value={this.state.topic}
+                                        type="text" 
+                                        className="form-control"
+                                        name="topic" 
+                                        onChange={this.topicSearchHandler}
+                                        aria-describedby="emailHelp" 
+                                        placeholder="Search for topic"/> 
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="startdate">Start Date</label>
+                                    <input
+                                        name="startdate"
+                                        value={this.state.startdate}
+                                        type="text" 
+                                        className="form-control" 
+                                        onChange={this.startdateSearchHandler} 
+                                        placeholder="Start Date"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="enddate">End  Date</label>
+                                    <input
+                                        name="enddate"
+                                        value={this.state.enddate} 
+                                        type="text" 
+                                        className="form-control" 
+                                        onChange={this.enddateSearchHandler} 
+                                        placeholder="End Date"/>
+                                </div>
+                                <button className="btn btn-primary" onClick={this.formSubmit}>Find Articles</button>
+                                </form>
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label for="startdate">Start Date</label>
-                            <input
-                                name="startdate"
-                                value={this.state.startdate}
-                                type="text" 
-                                className="form-control" 
-                                onChange={this.startdateSearchHandler} 
-                                placeholder="Start Date"/>
-                        </div>
-                        <div className="form-group">
-                            <label for="enddate">End  Date</label>
-                            <input
-                                name="enddate"
-                                value={this.state.enddate} 
-                                type="text" 
-                                className="form-control" 
-                                onChange={this.enddateSearchHandler} 
-                                placeholder="End Date"/>
-                        </div>
-                        <button className="btn btn-primary" onClick={this.formSubmit}>Find Articles</button>
-                    </form>
+                    </div>
                 </div>
+                <Results searchresults={this.state.results}/> 
             </div>
-            <Results searchresults={this.state.results}/> 
-            </div>
-        );  
+        );
     }
 }
 

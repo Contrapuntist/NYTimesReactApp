@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Route } from 'react-router-dom'
 import Main from './components/Main.jsx';
 import Search from './components/Search.jsx';
 import Header from './components/Header.jsx';
