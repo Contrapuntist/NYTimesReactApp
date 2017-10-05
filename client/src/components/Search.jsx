@@ -24,13 +24,10 @@ class Search extends React.Component {
             topic: "",
             startdate: "",
             enddate: "", 
-            results: []
+            results: [],
+            articleToSave: {},
+            savedarticles: []
         };
-
-
-    // componentDidMount() {
-    //     this.searchNYTimes();
-    // }
 
     searchNYTimes = (topic, startdate, enddate) => { 
         API.search(topic, startdate, enddate)
@@ -50,6 +47,18 @@ class Search extends React.Component {
             this.searchNYTimes(this.state.topic, this.state.startdate, this.state.enddate);
             console.log('form submit triggered');
         }
+    }
+
+    saveArticleSubmit = event => {
+        event.preventDefault();
+        console.log('save article button clicked');
+        const articleObj = { 
+            title: this.headline,
+            synopsis: this.summary,
+            link: this.articleURL
+        }
+        API.savearticle(articleObj);
+
     }
 
     topicSearchHandler = event => { 
@@ -96,7 +105,7 @@ class Search extends React.Component {
                                         placeholder="Search for topic"/> 
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="startdate">Start Date</label>
+                                    <label htmlFor="startdate">Start Date <small>(Format: YYYYMMDD)</small></label>
                                     <input
                                         name="startdate"
                                         value={this.state.startdate}
@@ -106,7 +115,7 @@ class Search extends React.Component {
                                         placeholder="Start Date"/>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="enddate">End  Date</label>
+                                    <label htmlFor="enddate">End  Date <small>(Format: YYYYMMDD)</small></label>
                                     <input
                                         name="enddate"
                                         value={this.state.enddate} 
@@ -121,7 +130,10 @@ class Search extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Results searchresults={this.state.results}/> 
+                <Results 
+                    searchresults={this.state.results}
+                    savearticle={this.saveArticleSubmit}
+                    articledata={this.state.articleToSave}/> 
             </div>
         );
     }

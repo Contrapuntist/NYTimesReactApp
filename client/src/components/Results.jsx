@@ -1,4 +1,5 @@
 import React from 'react';
+import Savebutton from './Savebutton';
 
 
 const results = props => { 
@@ -6,12 +7,12 @@ const results = props => {
     console.log(props);
     const searchresults = props.searchresults.map((searchresult) => {
         return(
-        <div className='card my-2' key='{searchresult._id}'>
+        <div className='card my-2' key={searchresult._id}>
             <div className='card-body' >
-                <h2>{searchresult.headline.main}</h2>
-                <p>{searchresult.snippet}</p>
-                <p>{searchresult.web_url}</p>
-                <button className='btn btn-primary'>Save Article</button>
+                <h2 className="headline">{searchresult.headline.main}</h2>
+                <p className="summary">{searchresult.snippet}</p>
+                <p><a className="articleURL" href={searchresult.web_url} target="_blank">{searchresult.web_url}</a></p>
+                <Savebutton onClick={props.savearticle}>Save Article</Savebutton>
             </div>
         </div>
         );
