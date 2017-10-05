@@ -18,20 +18,46 @@ if (process.env.NODE_ENV === "production") {
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// app.get("*", function(req, res) {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 app.use(routes);
 
+// mongoose.Promise = global.Promise;
+// // Connect to the Mongo DB
+// // mongoose.connect(
+// //   process.env.MONGODB_URI || "mongodb://localhost/nytreactdb",
+// //   {
+// //     useMongoClient: true
+// //   }
+// // );
+
+// Database configuration with mongoose
 mongoose.Promise = global.Promise;
-// Connect to the Mongo DB
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/nytreactdb",
-  {
-    useMongoClient: true
-  }
-);
+
+var databaseUri = 'mongodb://localhost/nytreactdb';
+if (process.env.MONGODB_URI) { 
+  var promise = mongoose.connect(process.env.MONGODB_URI)
+} else {
+  var promise = mongoose.connect(databaseUri, {
+    useMongoClient: true,
+    /* other options */
+  });
+}
+var db = mongoose.connection;
+
+// Show any mongoose errors
+db.on("error", function(error) {
+  console.log("Mongoose Error: ", error);
+});
+
+// Once logged in to the db through mongoose, log a success message
+db.once("open", function() {
+  console.log("Mongoose connection successful.");
+});
+
+
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
