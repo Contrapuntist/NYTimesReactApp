@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'; 
-const { Schema } = mongoose; 
+const  mongoose = require('mongoose'); 
+const  Schema  = mongoose.Schema; 
 
 const ArticleSchema = new Schema({
     title: { 
@@ -18,4 +18,4 @@ const ArticleSchema = new Schema({
 
 let Article = mongoose.model("Article", ArticleSchema); 
 
-export default Article;
+module.exports = Article;

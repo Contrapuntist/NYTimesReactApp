@@ -53,12 +53,11 @@ class Search extends React.Component {
         event.preventDefault();
         console.log('save article button clicked');
         const articleObj = { 
-            title: this.headline,
-            synopsis: this.summary,
-            link: this.articleURL
+            title: "Bang your head with React",
+            synopsis: "This story has a fun plot.",
+            link: "http://www.example.com"
         }
         API.savearticle(articleObj);
-
     }
 
     topicSearchHandler = event => { 

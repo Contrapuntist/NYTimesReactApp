@@ -20,7 +20,9 @@ export default {
   savearticle: function(articleData) { 
     console.log('in save article'); 
     // save book title, synopsis, link
-    return axios.post('/api/savearticle', articleData);
+    return axios
+      .post('/api/savearticle')
+      .catch(err => console.log(err));
   }
 
 
