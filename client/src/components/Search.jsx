@@ -1,6 +1,7 @@
 import React from "react";
 import API from '../Utils/API.js';
 import Results from './Results.jsx';
+import Helpers from '../Utils/Helpers.js'
 
 
 // const stubdata = {
@@ -29,6 +30,12 @@ class Search extends React.Component {
             savedarticles: []
         };
 
+    // componentDidMount() { 
+    //     this.searchNYTimes();
+    //     Helpers.runQuery('tacos', 20000101, 20101231)
+    //     .then(results => console.log(results));
+    // }
+
     searchNYTimes = (topic, startdate, enddate) => { 
         API.search(topic, startdate, enddate)
             .then(res => { 
@@ -55,7 +62,7 @@ class Search extends React.Component {
         const articleObj = { 
             title: "Bang your head with React",
             synopsis: "This story has a fun plot.",
-            link: "http://www.example.com"
+            url: "http://www.example.com"
         }
         API.savearticle(articleObj);
     }

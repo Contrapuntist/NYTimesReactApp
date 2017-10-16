@@ -6,8 +6,8 @@ const ArticleSchema = new Schema({
         type: String, 
         required: true
     }, 
-    date: { 
-        type: Date,
+    synopsis: { 
+        type: String,
         required: true
     }, 
     url: { 

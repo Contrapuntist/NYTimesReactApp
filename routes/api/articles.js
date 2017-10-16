@@ -8,6 +8,8 @@ const articlesController = require("../../controllers/articlesController");
 // }); 
 
 router.route("/")
-  .post(articlesController.create);
+  .post(articlesController.create); 
+
+router.get('/')  
 
 module.exports = router;
